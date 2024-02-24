@@ -1,16 +1,14 @@
-import React from 'react'
-import Header from '../Header'
-import Slider from '../Slider'
-
+import React from "react";
+import Header from "../Header";
+import Slider from "../Slider";
 
 const Checkout = () => {
   return (
-   <>
-   <Header />
-    <Slider />
-   </>
-  )
-}
+    <>
+      <Header />
+      <Slider />
+    </>
+  );
+};
 
-
-export default Checkout
+export default Checkout;

@@ -1,41 +1,46 @@
-import  { useContext, Fragment } from 'react'
-import { Link } from 'react-router-dom'
-import { MyContext } from './context/MyContext'
-import { Disclosure, Menu, Transition } from '@headlessui/react'
-import { Bars3Icon, BellIcon, MagnifyingGlassIcon, ShoppingBagIcon,  XMarkIcon } from '@heroicons/react/24/solid'
-import Strip from './Strip'
-import SideCart from './SideCart'
+import { useContext, Fragment } from "react";
+import { Link } from "react-router-dom";
+import { MyContext } from "./context/MyContext";
+import { Disclosure, Menu, Transition } from "@headlessui/react";
+import {
+  Bars3Icon,
+  BellIcon,
+  MagnifyingGlassIcon,
+  ShoppingBagIcon,
+  XMarkIcon,
+} from "@heroicons/react/24/solid";
+import Strip from "./Strip";
+import SideCart from "./SideCart";
 
 const user = {
-  name: 'Tom Cook',
-  email: 'tom@example.com',
+  name: "Tom Cook",
+  email: "tom@example.com",
   imageUrl:
-    'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-}
+    "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
+};
 const navigation = [
-  { name: 'HOME', href: '/', current: true },
-  { name: 'SHOP', href: '/', current: false },
-  { name: 'FEATURES', href: '/', current: false },
-  { name: 'CHECKOUT', href: '/Checkout', current: false },
-  { name: 'SEARCH', href: '/', current: false },
-]
+  { name: "HOME", href: "/", current: true },
+  { name: "SHOP", href: "/", current: false },
+  { name: "FEATURES", href: "/", current: false },
+  { name: "CHECKOUT", href: "/Checkout", current: false },
+  { name: "SEARCH", href: "/", current: false },
+];
 const userNavigation = [
-  { name: 'Your Profile', href: '/' },
-  { name: 'Settings', href: '/' },
-  { name: 'Sign out', href: '/' },
-]
+  { name: "Your Profile", href: "/" },
+  { name: "Settings", href: "/" },
+  { name: "Sign out", href: "/" },
+];
 
 function classNames(...classes) {
-  return classes.filter(Boolean).join(' ')
+  return classes.filter(Boolean).join(" ");
 }
 
-
 const Header = () => {
-  const {  setOpen } = useContext(MyContext)
+  const { setOpen } = useContext(MyContext);
   //const [isShowing, setIsShowing] = useState(false)
   return (
     <>
-<div className="min-h-full shadow">
+      <div className="min-h-full shadow">
         <Disclosure as="nav" className=" bg-white">
           {({ open }) => (
             <>
@@ -53,11 +58,11 @@ const Header = () => {
                             to={item.href}
                             className={classNames(
                               item.current
-                                ? 'bg-gray-200 text-black'
-                                : 'text-black hover:bg-gray-100 hover:text-black',
-                              'rounded-md px-3 py-2 text-sm font-medium'
+                                ? "bg-gray-200 text-black"
+                                : "text-black hover:bg-gray-100 hover:text-black",
+                              "rounded-md px-3 py-2 text-sm font-medium"
                             )}
-                            aria-current={item.current ? 'page' : undefined}
+                            aria-current={item.current ? "page" : undefined}
                           >
                             {item.name}
                           </Link>
@@ -68,21 +73,28 @@ const Header = () => {
                   <div className="hidden md:block">
                     <div className="ml-4 flex items-center md:ml-6">
                       <button
-                        type="button"                        
-                        className="relative rounded-full p-1 text-gray-600 hover:text-gray-400">
+                        type="button"
+                        className="relative rounded-full p-1 text-gray-600 hover:text-gray-400"
+                      >
                         <span className="absolute -inset-1.5" />
-                        <span className="sr-only">Buscar</span>                        
-                        <MagnifyingGlassIcon className="h-6 w-6" aria-hidden="true" />
+                        <span className="sr-only">Buscar</span>
+                        <MagnifyingGlassIcon
+                          className="h-6 w-6"
+                          aria-hidden="true"
+                        />
                       </button>
                       <button
                         type="button"
                         onClick={() => setOpen(true)}
-                        className="relative rounded-full p-1 text-gray-600 hover:text-gray-400">
+                        className="relative rounded-full p-1 text-gray-600 hover:text-gray-400"
+                      >
                         <span className="absolute -inset-1.5" />
-                        <span className="sr-only">Ver Carrito</span>                          
-                        <ShoppingBagIcon className="h-6 w-6" aria-hidden="true" />
+                        <span className="sr-only">Ver Carrito</span>
+                        <ShoppingBagIcon
+                          className="h-6 w-6"
+                          aria-hidden="true"
+                        />
                       </button>
-                      
 
                       {/* Profile dropdown */}
                       <Menu as="div" className="relative ml-3">
@@ -90,11 +102,15 @@ const Header = () => {
                           <Menu.Button className="relative flex max-w-xs items-center rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
                             <span className="absolute -inset-1.5" />
                             <span className="sr-only">Open user menu</span>
-                            <img className="h-8 w-8 rounded-full" src={user.imageUrl} alt="" />
+                            <img
+                              className="h-8 w-8 rounded-full"
+                              src={user.imageUrl}
+                              alt=""
+                            />
                           </Menu.Button>
                         </div>
                         <Transition
-                          as={Fragment}                          
+                          as={Fragment}
                           enter="transition ease-out duration-100"
                           enterFrom="transform opacity-0 scale-95"
                           enterTo="transform opacity-100 scale-100"
@@ -107,11 +123,11 @@ const Header = () => {
                               <Menu.Item key={item.name}>
                                 {({ active }) => (
                                   <Link
-key={item.name}
+                                    key={item.name}
                                     to={item.href}
                                     className={classNames(
-                                      active ? 'bg-gray-100' : '',
-                                      'block px-4 py-2 text-sm text-gray-700'
+                                      active ? "bg-gray-100" : "",
+                                      "block px-4 py-2 text-sm text-gray-700"
                                     )}
                                   >
                                     {item.name}
@@ -130,9 +146,15 @@ key={item.name}
                       <span className="absolute -inset-0.5" />
                       <span className="sr-only">Open main menu</span>
                       {open ? (
-                        <XMarkIcon className="block h-6 w-6" aria-hidden="true" />
+                        <XMarkIcon
+                          className="block h-6 w-6"
+                          aria-hidden="true"
+                        />
                       ) : (
-                        <Bars3Icon className="block h-6 w-6" aria-hidden="true" />
+                        <Bars3Icon
+                          className="block h-6 w-6"
+                          aria-hidden="true"
+                        />
                       )}
                     </Disclosure.Button>
                   </div>
@@ -147,10 +169,12 @@ key={item.name}
                       as="a"
                       href={item.href}
                       className={classNames(
-                        item.current ? 'bg-gray-200 text-black' : 'text-gray-300 hover:bg-gray-100 hover:text-black',
-                        'block rounded-md px-3 py-2 text-base font-medium'
+                        item.current
+                          ? "bg-gray-200 text-black"
+                          : "text-gray-300 hover:bg-gray-100 hover:text-black",
+                        "block rounded-md px-3 py-2 text-base font-medium"
                       )}
-                      aria-current={item.current ? 'page' : undefined}
+                      aria-current={item.current ? "page" : undefined}
                     >
                       {item.name}
                     </Disclosure.Button>
@@ -159,28 +183,44 @@ key={item.name}
                 <div className="border-t border-gray-700 pb-3 pt-4">
                   <div className="flex items-center px-5">
                     <div className="flex-shrink-0">
-                      <img className="h-10 w-10 rounded-full" src={user.imageUrl} alt="" />
+                      <img
+                        className="h-10 w-10 rounded-full"
+                        src={user.imageUrl}
+                        alt=""
+                      />
                     </div>
                     <div className="ml-3">
-                      <div className="text-base font-medium leading-none text-white">{user.name}</div>
-                      <div className="text-sm font-medium leading-none text-gray-400">{user.email}</div>
+                      <div className="text-base font-medium leading-none text-white">
+                        {user.name}
+                      </div>
+                      <div className="text-sm font-medium leading-none text-gray-400">
+                        {user.email}
+                      </div>
                     </div>
                     <div className="ml-auto">
-                    <button
-                      type="button"
-                      className="relative ml-auto flex-shrink-0 rounded-full text-gray-600 hover:text-gray-400">
-                      <span className="absolute -inset-1.5" />
-                      <span className="sr-only">View notifications</span>
-                      <BellIcon className="h-6 w-6" aria-hidden="true" />
-                    </button>
-                    <button
-                      type="button"
-                      data-drawer-target="drawer-right-example" data-drawer-show="drawer-right-example" data-drawer-placement="right" aria-controls="drawer-right-example"
-                      className="relative ml-auto flex-shrink-0 rounded-full text-gray-600 hover:text-gray-400">
-                      <span className="absolute -inset-1.5" />
-                      <span className="sr-only">View notifications</span>
-                      <ShoppingBagIcon className="h-6 w-6" aria-hidden="true" />
-                    </button>
+                      <button
+                        type="button"
+                        className="relative ml-auto flex-shrink-0 rounded-full text-gray-600 hover:text-gray-400"
+                      >
+                        <span className="absolute -inset-1.5" />
+                        <span className="sr-only">View notifications</span>
+                        <BellIcon className="h-6 w-6" aria-hidden="true" />
+                      </button>
+                      <button
+                        type="button"
+                        data-drawer-target="drawer-right-example"
+                        data-drawer-show="drawer-right-example"
+                        data-drawer-placement="right"
+                        aria-controls="drawer-right-example"
+                        className="relative ml-auto flex-shrink-0 rounded-full text-gray-600 hover:text-gray-400"
+                      >
+                        <span className="absolute -inset-1.5" />
+                        <span className="sr-only">View notifications</span>
+                        <ShoppingBagIcon
+                          className="h-6 w-6"
+                          aria-hidden="true"
+                        />
+                      </button>
                     </div>
                   </div>
                   <div className="mt-3 space-y-1 px-2">
@@ -199,13 +239,12 @@ key={item.name}
               </Disclosure.Panel>
             </>
           )}
-        </Disclosure>           
+        </Disclosure>
       </div>
       <Strip />
       <SideCart />
     </>
-  )
-}
+  );
+};
 
-export default Header
-
+export default Header;

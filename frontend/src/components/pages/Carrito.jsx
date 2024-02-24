@@ -1,10 +1,14 @@
-import React from 'react'
+import React from "react";
+import Header from "../Header";
+import Slider from "../Slider";
 
-const Carrito = props => {
+const Carrito = (props) => {
   return (
-    <div>Carrito</div>
-  )
-}
+    <>
+      <Header />
+      <Slider />
+    </>
+  );
+};
 
-
-export default Carrito
+export default Carrito;
