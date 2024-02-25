@@ -35,18 +35,18 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-const Header = () => {
+const Header = ({ strip = true, cart = true }) => {
   const { setOpen } = useContext(MyContext);
   //const [isShowing, setIsShowing] = useState(false)
   return (
     <>
-      <div className="min-h-full shadow">
+      <div className="min-h-full ">
         <Disclosure as="nav" className=" bg-white">
           {({ open }) => (
             <>
               <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                 <div className="flex h-16 items-center justify-between">
-                  <div className="flex items-center">
+                  <div className="flex items-center" id="navbar-sticky">
                     <div className="flex-shrink-0 font-extrabold text-3xl">
                       AVONE
                     </div>
@@ -241,8 +241,8 @@ const Header = () => {
           )}
         </Disclosure>
       </div>
-      <Strip />
-      <SideCart />
+      {strip ? <Strip /> : <div className=" shadow py-2"></div>}
+      {cart ? <SideCart /> : ""}
     </>
   );
 };

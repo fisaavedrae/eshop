@@ -5,7 +5,7 @@ import Slider from "../Slider";
 const Checkout = () => {
   return (
     <>
-      <Header />
+      <Header strip={false} cart={false} />
       <Slider />
     </>
   );
