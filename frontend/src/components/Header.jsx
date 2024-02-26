@@ -11,6 +11,7 @@ import {
 } from "@heroicons/react/24/solid";
 import Strip from "./Strip";
 import SideCart from "./SideCart";
+import Search from "./Search";
 
 const user = {
   name: "Tom Cook",
@@ -74,6 +75,10 @@ const Header = ({ strip = true, cart = true }) => {
                     <div className="ml-4 flex items-center md:ml-6">
                       <button
                         type="button"
+                        data-drawer-target="drawer-top-example"
+                        data-drawer-show="drawer-top-example"
+                        data-drawer-placement="top"
+                        aria-controls="drawer-top-example"
                         className="relative rounded-full p-1 text-gray-600 hover:text-gray-400"
                       >
                         <span className="absolute -inset-1.5" />
@@ -94,6 +99,9 @@ const Header = ({ strip = true, cart = true }) => {
                           className="h-6 w-6"
                           aria-hidden="true"
                         />
+                        <div className="absolute inline-flex items-center justify-center w-4 h-4 text-xs text-white bg-black  rounded-full -top-1 -end-1 dark:border-gray-900">
+                          8
+                        </div>
                       </button>
 
                       {/* Profile dropdown */}
@@ -243,6 +251,7 @@ const Header = ({ strip = true, cart = true }) => {
       </div>
       {strip ? <Strip /> : <div className=" shadow py-2"></div>}
       {cart ? <SideCart /> : ""}
+      <Search />
     </>
   );
 };
