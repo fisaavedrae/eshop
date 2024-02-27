@@ -54,26 +54,29 @@ const Search = () => {
     <>
       <div
         id="drawer-top-example"
-        className="fixed top-0 left-0 right-0 z-40 w-full p-4 transition-transform -translate-y-full bg-white dark:bg-gray-800"
+        className="fixed top-0 left-0 right-0 z-40 w-full p-4 transition-transform -translate-y-full bg-white dark:bg-gray-800 "
         tabIndex="-1"
         aria-labelledby="drawer-top-label"
       >
-        <h5
-          id="drawer-top-label"
-          className="inline-flex items-center mb-4 text-base uppercase font-semibold text-black dark:text-gray-400"
-        >
-          Que estas buscando?
-        </h5>
-        <button
-          type="button"
-          data-drawer-hide="drawer-top-example"
-          aria-controls="drawer-top-example"
-          className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 absolute top-2.5 end-2.5 inline-flex items-center justify-center dark:hover:bg-gray-600 dark:hover:text-white"
-        >
-          <XMarkIcon className="w-5 h-5" />
-          <span className="sr-only">Close menu</span>
-        </button>
-        <div className="flex justify-start items-center border-b border border-t-0 border-r-0 border-l-0 border-gray-200 ">
+        <div className="flex justify-between items-center px-6  mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8">
+          <h5
+            id="drawer-top-label"
+            className="inline-flex items-center mb-4 text-base uppercase font-semibold text-black dark:text-gray-400"
+          >
+            Que estas buscando?
+          </h5>
+          <button
+            type="button"
+            data-drawer-hide="drawer-top-example"
+            aria-controls="drawer-top-example"
+            className="text-gray-400 bg-transparent  hover:text-gray-900 rounded-lg text-sm w-8 h-8   inline-flex items-center justify-center dark:hover:bg-gray-600 dark:hover:text-white"
+          >
+            <XMarkIcon className="w-5 h-5" />
+            <span className="sr-only">Close menu</span>
+          </button>
+        </div>
+
+        <div className="flex justify-start items-center border-b border border-t-0 border-r-0 border-l-0 border-gray-200 px-6  mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8">
           <div className=" w-72">
             <Listbox value={selected} onChange={setSelected}>
               {({ open }) => (

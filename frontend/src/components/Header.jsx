@@ -21,15 +21,14 @@ const user = {
 };
 const navigation = [
   { name: "HOME", href: "/", current: true },
-  { name: "SHOP", href: "/", current: false },
-  { name: "FEATURES", href: "/", current: false },
+  { name: "PRODUCTOS", href: "/Shop", current: false },
+  { name: "CATEGORIAS", href: "/Categorias", current: false },
   { name: "CHECKOUT", href: "/Checkout", current: false },
-  { name: "SEARCH", href: "/", current: false },
 ];
 const userNavigation = [
-  { name: "Your Profile", href: "/" },
-  { name: "Settings", href: "/" },
-  { name: "Sign out", href: "/" },
+  { name: "Your Profile", href: "/Perfil" },
+  { name: "Login", href: "/Login" },
+  { name: "Sign out", href: "/CerrarSesion" },
 ];
 
 function classNames(...classes) {

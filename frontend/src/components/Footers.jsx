@@ -1,19 +1,23 @@
 import React from "react";
 
-const Footers = () => {
+const Footers = ({ strip = true }) => {
   return (
     <>
-      <div className="flex-col text-center items-center  bg-black px-8 py-1 sm:px-3.5 ">
-        <div className="">
-          <p className="text-sm leading-6 text-white">
-            <strong className="font-semibold">30% </strong>
-            de descuento en algunos productos
-          </p>
+      {strip ? (
+        <div className="flex-col text-center items-center  bg-black px-8 py-1 sm:px-3.5 ">
+          <div className="">
+            <p className="text-sm leading-6 text-white">
+              <strong className="font-semibold">30% </strong>
+              de descuento en algunos productos
+            </p>
+          </div>
         </div>
-      </div>
+      ) : (
+        ""
+      )}
 
-      <footer className="bg-white dark:bg-gray-900 w-full">
-        <div className="mx-auto w-full ">
+      <footer className="bg-gray-100 dark:bg-gray-900 w-full">
+        <div className="mx-auto max-w-screen-xl px-4 py-12 ">
           <div className="grid grid-cols-2 gap-8 px-8 py-6 lg:py-8 md:grid-cols-4">
             <div>
               <h2 className="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">
@@ -123,7 +127,9 @@ const Footers = () => {
               </ul>
             </div>
           </div>
-          <div className="px-4 py-6 w-full bg-gray-100 dark:bg-gray-700 md:flex md:items-center md:justify-between">
+        </div>
+        <div className="px-4 py-6 w-full bg-white dark:bg-gray-700 ">
+          <div className="mx-auto max-w-screen-xl px-6  md:flex md:items-center md:justify-between">
             <span className="text-sm text-gray-500 dark:text-gray-300 sm:text-center">
               © 2023 <a href="https://flowbite.com/">Flowbite™</a>. All Rights
               Reserved.
