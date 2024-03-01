@@ -1,3 +1,6 @@
+import React, { useContext, useState } from "react";
+import { useEffect } from "react";
+import { MyContext } from "../context/MyContext";
 import {
   MagnifyingGlassPlusIcon,
   ShoppingCartIcon,
@@ -7,156 +10,37 @@ import Header from "../Header";
 import Footers from "../Footers";
 import ShopHeaderFiltros from "../ShopHeaderFiltros";
 import Paginacion from "../Paginacion";
-const products = [
-  {
-    id: 1,
-    name: "Basic Tee",
-    href: "#",
-    imageSrc:
-      "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg",
-    imageAlt: "Front of men's Basic Tee in black.",
-    price: "$35",
-    color: "Black",
-  },
-  {
-    id: 2,
-    name: "Basic Tee",
-    href: "#",
-    imageSrc:
-      "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg",
-    imageAlt: "Front of men's Basic Tee in black.",
-    price: "$35",
-    color: "Black",
-  },
-  {
-    id: 3,
-    name: "Basic Tee",
-    href: "#",
-    imageSrc:
-      "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg",
-    imageAlt: "Front of men's Basic Tee in black.",
-    price: "$35",
-    color: "Black",
-  },
-  {
-    id: 4,
-    name: "Basic Tee",
-    href: "#",
-    imageSrc:
-      "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg",
-    imageAlt: "Front of men's Basic Tee in black.",
-    price: "$35",
-    color: "Black",
-  },
-  {
-    id: 5,
-    name: "Basic Tee",
-    href: "#",
-    imageSrc:
-      "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg",
-    imageAlt: "Front of men's Basic Tee in black.",
-    price: "$35",
-    color: "Black",
-  },
-  {
-    id: 6,
-    name: "Basic Tee",
-    href: "#",
-    imageSrc:
-      "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg",
-    imageAlt: "Front of men's Basic Tee in black.",
-    price: "$35",
-    color: "Black",
-  },
-  // More products...
-];
+import LoadingSpinner from "../LoadingSpinner";
+import GrillaProductos from "../GrillaProductos";
+import jsonProductos from "../../assets/productos.json";
 
 const Shop = () => {
+  const { productos, setProductos } = useContext(MyContext);
+  const [isLoading, setIsLoading] = useState(false);
+  useEffect(() => {
+    ReadAPI();
+  }, []);
+  console.log("jsonProductos", jsonProductos);
+  setProductos(jsonProductos);
+  async function ReadAPI() {
+    try {
+      setIsLoading(true);
+      //const response = await fetch("https://dummyjson.com/products");
+      //const data = await response.json();
+
+      setProductos(jsonProductos);
+      setIsLoading(false);
+    } catch (error) {
+      console.log(error);
+    }
+  }
   return (
     <>
       <Header />
       <div className="bg-white">
-        <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
-          <ShopHeaderFiltros cantidadProductos={products.length} />
-
-          <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
-            {products.map((product) => (
-              <>
-                <div key={product.id} className=" relative">
-                  <div className="aspect-h-1 aspect-w-1 w-full  rounded-sm bg-gray-200 lg:aspect-none ">
-                    <div className="flex items-center justify-center">
-                      <div className="overflow-hidden  cursor-pointer rounded-sm relative group">
-                        <div className="rounded-xl z-10 opacity-0 group-hover:opacity-100 transition duration-300 ease-in-out cursor-pointer absolute  to-transparent bg-gradient-to-t inset-x-0 -bottom-2 pt-30 text-white flex items-end">
-                          <div className="transform-gpu mx-auto p-4 space-y-3 group-hover:opacity-100 group-hover:translate-y-0 translate-y-4 pb-6  transition duration-300 ">
-                            <div className="flex flex-row justify-center text-center  items-center  gap-3 w-full ">
-                              <button
-                                data-tooltip-target={
-                                  "tooltip-cart" + product.id
-                                }
-                                type="button"
-                              >
-                                <ShoppingCartIcon className="h-8 w-8 text-white bg-black hover:bg-gray-500 rounded-md font-thin py-1 px-1" />
-                              </button>
-
-                              <div
-                                id={"tooltip-cart" + product.id}
-                                role="tooltip"
-                                className="absolute z-50 w-32 invisible inline-block px-3 py-2 text-sm font-thin text-white bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700"
-                              >
-                                Agregar al carro
-                                <div
-                                  className="tooltip-arrow"
-                                  data-popper-arrow
-                                ></div>
-                              </div>
-                              <button
-                                data-tooltip-target={
-                                  "tooltip-detail" + product.id
-                                }
-                                type="button"
-                              >
-                                <MagnifyingGlassPlusIcon className="h-8 w-8 text-white bg-black hover:bg-gray-500 rounded-md font-thin py-1 px-1" />
-                              </button>
-                              <div
-                                id={"tooltip-detail" + product.id}
-                                role="tooltip"
-                                className="absolute z-22 invisible inline-block px-3 py-2 text-sm font-thin text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700"
-                              >
-                                Vista rapida
-                                <div
-                                  className="tooltip-arrow"
-                                  data-popper-arrow
-                                ></div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <img
-                          src={product.imageSrc}
-                          alt={product.imageAlt}
-                          className="h-full w-full object-cover object-center lg:h-full lg:w-full"
-                        />
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="mt-4 flex-col justify-between">
-                    <div className="items-center text-center">
-                      <h3 className="text-sm text-gray-700">
-                        <a href={product.href}>
-                          <span aria-hidden="true" className="" />
-                          {product.name}
-                        </a>
-                      </h3>
-                      <p className="mt-1 text-sm text-gray-500">
-                        {product.price}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </>
-            ))}
-          </div>
+        <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8 ">
+          <ShopHeaderFiltros cantidadProductos={productos.length} />
+          {isLoading ? <LoadingSpinner /> : <GrillaProductos />}
         </div>
       </div>
       <Paginacion cantidadPaginas={10} paginaActiva={5} />

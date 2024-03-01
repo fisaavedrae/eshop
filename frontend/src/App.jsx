@@ -20,6 +20,8 @@ function App() {
   const [carro, setCarro] = useState([]);
   const [orderProducts, setOrderProducts] = useState([]);
   const [open, setOpen] = useState(false);
+  const [openVistaRapida, setOpenVistaRapida] = useState(false);
+  const [idProductoVistaRapida, setIdProductoVistaRapida] = useState(1);
 
   return (
     <>
@@ -37,6 +39,10 @@ function App() {
           setTotalOrder,
           open,
           setOpen,
+          openVistaRapida,
+          setOpenVistaRapida,
+          idProductoVistaRapida,
+          setIdProductoVistaRapida,
         }}
       >
         <Routes>

@@ -1,8 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { ChevronDownIcon, XMarkIcon } from "@heroicons/react/24/outline";
 
 const Filtros = (props) => {
+  const [minPrice, setMinPrice] = useState(0);
+  const [maxPrice, setMaxPrice] = useState(0);
+  const highPrice = 50000;
+  const maxMinPrice = highPrice / 2 - 1;
+  const minMaxPrice = highPrice / 2;
+
+  const handleChangeMinPrice = (event) => {
+    setMinPrice(event.target.value);
+  };
+
+  const handleChangeMaxPrice = (event) => {
+    setMaxPrice(event.target.value);
+  };
   return (
     <>
       <div
@@ -43,7 +56,39 @@ const Filtros = (props) => {
             id="accordion-flush-body-1"
             className="hidden"
             aria-labelledby="accordion-flush-heading-1"
-          ></div>
+          >
+            <div>
+              <label
+                htmlFor="small-range"
+                className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+              >
+                Small range
+              </label>
+              <div className="div">
+                <input
+                  id="minPrice"
+                  type="range"
+                  min={0}
+                  max={maxMinPrice}
+                  onChange={handleChangeMinPrice}
+                  className=" w-32 h-1 mb-6 bg-gray-200 rounded-lg appearance-none cursor-pointer range-sm dark:bg-gray-700"
+                />
+                <input
+                  id="maxPrice"
+                  type="range"
+                  min={minMaxPrice}
+                  max={highPrice}
+                  onChange={handleChangeMaxPrice}
+                  className=" w-32 h-1 mb-6 bg-gray-200 rounded-lg appearance-none cursor-pointer range-sm dark:bg-gray-700"
+                />
+              </div>
+            </div>
+            <div className="div">
+              <span>$ {minPrice}</span>
+              {" - "}
+              <span>$ {maxPrice}</span>
+            </div>
+          </div>
           <h2 id="accordion-flush-heading-2">
             <button
               type="button"
