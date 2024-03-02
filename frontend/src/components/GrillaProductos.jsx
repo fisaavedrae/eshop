@@ -1,33 +1,36 @@
-import React, { useContext, Fragment, useState } from "react";
-import PropTypes from "prop-types";
+import { useContext } from "react";
+
 import { MyContext } from "./context/MyContext";
+import { useNavigate } from "react-router-dom";
 import {
   MagnifyingGlassPlusIcon,
   ShoppingCartIcon,
-  XMarkIcon,
 } from "@heroicons/react/24/outline";
 
-import { Dialog, RadioGroup, Transition } from "@headlessui/react";
-
-import { StarIcon } from "@heroicons/react/20/solid";
 import VistaRapidaProducto from "./VistaRapidaProducto";
 
-const GrillaProductos = (props) => {
+const GrillaProductos = () => {
   const {
     productos,
-    setProductos,
-    openVistaRapida,
+
     setOpenVistaRapida,
     idProductoVistaRapida,
     setIdProductoVistaRapida,
+    agregarCarrito,
+    formatPrecio,
   } = useContext(MyContext);
 
-  console.log("productos shop", productos);
+  //console.log("productos shop", productos);
   const handleVistaRapida = (id) => {
     console.log("entre");
 
     setIdProductoVistaRapida(id);
     setOpenVistaRapida(true);
+  };
+
+  const navigate = useNavigate();
+  const irAProducto = (id) => {
+    navigate(`/Producto/${id}`);
   };
 
   return (
@@ -45,6 +48,7 @@ const GrillaProductos = (props) => {
                           <button
                             data-tooltip-target={"tooltip-cart" + product.id}
                             type="button"
+                            onClick={() => agregarCarrito(product)}
                           >
                             <ShoppingCartIcon className="h-8 w-8 text-white bg-black hover:bg-gray-500 rounded-md font-thin py-1 px-1" />
                           </button>
@@ -84,6 +88,7 @@ const GrillaProductos = (props) => {
                     <img
                       src={product.thumbnail}
                       alt={product.title}
+                      onClick={() => irAProducto(product.id)}
                       className="h-full w-full object-cover object-center lg:h-full lg:w-full"
                     />
                   </div>
@@ -99,7 +104,7 @@ const GrillaProductos = (props) => {
                     </a>
                   </h3>
                   <p className="mt-1 text-sm text-gray-500">
-                    $ {new Intl.NumberFormat("es-CL").format(product.price)}
+                    {formatPrecio(product.price)}
                   </p>
                 </div>
               </div>
@@ -107,11 +112,12 @@ const GrillaProductos = (props) => {
           </>
         ))}
       </div>
-      <VistaRapidaProducto />
+
+      {productos.length > 0 && (
+        <VistaRapidaProducto id={idProductoVistaRapida} />
+      )}
     </>
   );
 };
-
-GrillaProductos.propTypes = {};
 
 export default GrillaProductos;

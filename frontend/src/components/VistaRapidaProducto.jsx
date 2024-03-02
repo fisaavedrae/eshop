@@ -1,32 +1,29 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import PropTypes from "prop-types";
 import { MyContext } from "./context/MyContext";
-import { Fragment, useState } from "react";
-import { Dialog, RadioGroup, Transition } from "@headlessui/react";
+import { Fragment } from "react";
+import { Dialog, Transition } from "@headlessui/react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import { StarIcon } from "@heroicons/react/20/solid";
 import Gallery from "./Gallery";
 
-function classNames(...classes) {
-  return classes.filter(Boolean).join(" ");
-}
-
-const VistaRapidaProducto = (props) => {
+const VistaRapidaProducto = ({ id }) => {
   const {
     productos,
-    setProductos,
     openVistaRapida,
     setOpenVistaRapida,
-    idProductoVistaRapida,
-    setIdProductoVistaRapida,
+    classNames,
+    agregarCarrito,
+    formatPrecio,
   } = useContext(MyContext);
 
+  console.log("id", id);
   const producto = productos.find(
-    (producto) => Number(producto.id) === Number(idProductoVistaRapida)
+    (producto) => Number(producto.id) === Number(id)
   );
 
-  console.log("productos rapida", productos);
-  console.log("producto rapida", producto);
+  //console.log("productos rapida", productos);
+  //console.log("producto rapida", producto);
 
   return (
     <>
@@ -68,7 +65,6 @@ const VistaRapidaProducto = (props) => {
 
                     <div className="grid w-full grid-cols-1 items-start gap-x-6 gap-y-8 sm:grid-cols-12 lg:gap-x-8">
                       <div className="aspect-h-3 aspect-w-2 overflow-hidden rounded-lg bg-gray-100 sm:col-span-4 lg:col-span-5">
-                        {console.log("images", producto.images)}
                         <Gallery images={producto.images} />
                       </div>
                       <div className="sm:col-span-8 lg:col-span-7">
@@ -85,10 +81,7 @@ const VistaRapidaProducto = (props) => {
                           </h3>
 
                           <p className="text-2xl text-gray-900">
-                            ${" "}
-                            {new Intl.NumberFormat("es-CL").format(
-                              producto.price
-                            )}
+                            {formatPrecio(producto.price)}
                           </p>
 
                           {/* Reviews */}
@@ -130,36 +123,35 @@ const VistaRapidaProducto = (props) => {
                             Product options
                           </h3>
 
-                          <form>
-                            {/* Colors */}
-                            <div>
+                          {/* Colors */}
+                          <div>
+                            <h4 className="text-sm font-medium text-gray-900">
+                              Color
+                            </h4>
+                          </div>
+
+                          {/* Sizes */}
+                          <div className="mt-10">
+                            <div className="flex items-center justify-between">
                               <h4 className="text-sm font-medium text-gray-900">
-                                Color
+                                Size
                               </h4>
+                              <a
+                                href="#"
+                                className="text-sm font-medium text-indigo-600 hover:text-indigo-500"
+                              >
+                                Size guide
+                              </a>
                             </div>
+                          </div>
 
-                            {/* Sizes */}
-                            <div className="mt-10">
-                              <div className="flex items-center justify-between">
-                                <h4 className="text-sm font-medium text-gray-900">
-                                  Size
-                                </h4>
-                                <a
-                                  href="#"
-                                  className="text-sm font-medium text-indigo-600 hover:text-indigo-500"
-                                >
-                                  Size guide
-                                </a>
-                              </div>
-                            </div>
-
-                            <button
-                              type="submit"
-                              className="mt-6 flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-                            >
-                              Add to bag
-                            </button>
-                          </form>
+                          <button
+                            type="submit"
+                            onClick={() => agregarCarrito(producto)}
+                            className="mt-6 flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                          >
+                            Add to bag
+                          </button>
                         </section>
                       </div>
                     </div>
@@ -174,6 +166,8 @@ const VistaRapidaProducto = (props) => {
   );
 };
 
-VistaRapidaProducto.propTypes = {};
+VistaRapidaProducto.propTypes = {
+  id: PropTypes.number,
+};
 
 export default VistaRapidaProducto;

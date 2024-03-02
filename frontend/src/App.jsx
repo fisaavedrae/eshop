@@ -23,6 +23,30 @@ function App() {
   const [openVistaRapida, setOpenVistaRapida] = useState(false);
   const [idProductoVistaRapida, setIdProductoVistaRapida] = useState(1);
 
+  function classNames(...classes) {
+    return classes.filter(Boolean).join(" ");
+  }
+
+  const agregarCarrito = (obj) => {
+    setTotal(Number(total) + Number(obj.price));
+    const indice = carro.findIndex((item) => item.id === obj.id);
+
+    if (indice !== -1) {
+      carro[indice].qty = Number(obj.qty) + 1;
+      //console.log("carro antes de eliminar", carro);
+      setCarro([...carro]);
+    } else {
+      obj.qty = 1;
+      carro.push(obj);
+      setCarro(carro);
+    }
+  };
+
+  const formatPrecio = (precio) => {
+    const precioCLP = new Intl.NumberFormat("es-CL").format(precio);
+    return "$ " + precioCLP;
+  };
+
   return (
     <>
       <MyContext.Provider
@@ -43,6 +67,9 @@ function App() {
           setOpenVistaRapida,
           idProductoVistaRapida,
           setIdProductoVistaRapida,
+          classNames,
+          agregarCarrito,
+          formatPrecio,
         }}
       >
         <Routes>

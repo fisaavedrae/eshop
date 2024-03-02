@@ -20,7 +20,7 @@ const Shop = () => {
   useEffect(() => {
     ReadAPI();
   }, []);
-  console.log("jsonProductos", jsonProductos);
+  //console.log("jsonProductos", jsonProductos);
   setProductos(jsonProductos);
   async function ReadAPI() {
     try {

@@ -1,10 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-const Gallery = ({ data }) => {
-  const [active, setActive] = React.useState(
-    "https://images.unsplash.com/photo-1499696010180-025ef6e1a8f9?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80"
-  );
+const Gallery = ({ images }) => {
+  console.log("images: ", images[0]);
+  const [active, setActive] = React.useState(images[0]);
 
   return (
     <div className="grid gap-4">
@@ -16,12 +15,12 @@ const Gallery = ({ data }) => {
         />
       </div>
       <div className="grid grid-cols-5 gap-4">
-        {data.map((imagen) => (
+        {images.map((imagen) => (
           <div key={imagen.index}>
             <img
               onClick={() => setActive(imagen)}
               src={imagen}
-              className="h-20 max-w-full cursor-pointer rounded-lg object-cover object-center"
+              className=" h-16 max-w-full cursor-pointer rounded-lg object-cover object-center"
               alt="gallery-image"
             />
           </div>
@@ -32,7 +31,7 @@ const Gallery = ({ data }) => {
 };
 
 Gallery.propTypes = {
-  data: PropTypes.array,
+  images: PropTypes.array,
 };
 
 export default Gallery;

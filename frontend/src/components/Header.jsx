@@ -36,7 +36,7 @@ function classNames(...classes) {
 }
 
 const Header = ({ strip = true, cart = true }) => {
-  const { setOpen } = useContext(MyContext);
+  const { setOpen, carro } = useContext(MyContext);
   //const [isShowing, setIsShowing] = useState(false)
   return (
     <>
@@ -99,7 +99,7 @@ const Header = ({ strip = true, cart = true }) => {
                           aria-hidden="true"
                         />
                         <div className="absolute inline-flex items-center justify-center w-4 h-4 text-xs text-white bg-black  rounded-full -top-1 -end-1 dark:border-gray-900">
-                          8
+                          {carro.length}
                         </div>
                       </button>
 
