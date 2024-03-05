@@ -21,7 +21,13 @@ function App() {
   const [orderProducts, setOrderProducts] = useState([]);
   const [open, setOpen] = useState(false);
   const [openVistaRapida, setOpenVistaRapida] = useState(false);
-  const [idProductoVistaRapida, setIdProductoVistaRapida] = useState(1);
+  const [idProductoVistaRapida, setIdProductoVistaRapida] = useState(10);
+  const [filtros, setFiltros] = useState({
+    categoria: "all",
+    marca: "",
+    minPrice: 0,
+    maxPrice: 1000000,
+  });
 
   function classNames(...classes) {
     return classes.filter(Boolean).join(" ");
@@ -70,6 +76,8 @@ function App() {
           classNames,
           agregarCarrito,
           formatPrecio,
+          filtros,
+          setFiltros,
         }}
       >
         <Routes>

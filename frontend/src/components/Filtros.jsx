@@ -1,5 +1,7 @@
 import React, { useState } from "react";
+import { useContext } from "react";
 import PropTypes from "prop-types";
+import { MyContext } from "./context/MyContext";
 import { ChevronDownIcon, XMarkIcon } from "@heroicons/react/24/outline";
 
 const Filtros = (props) => {
@@ -9,12 +11,45 @@ const Filtros = (props) => {
   const maxMinPrice = highPrice / 2 - 1;
   const minMaxPrice = highPrice / 2;
 
+  const {
+    productos,
+    setProductos,
+    openVistaRapida,
+    setOpenVistaRapida,
+    classNames,
+    agregarCarrito,
+    formatPrecio,
+    filtros,
+    setFiltros,
+  } = useContext(MyContext);
+
   const handleChangeMinPrice = (event) => {
     setMinPrice(event.target.value);
+    setFiltros({ ...filtros, minPrice: event.target.value });
+    filtrarProductos();
   };
 
   const handleChangeMaxPrice = (event) => {
     setMaxPrice(event.target.value);
+    setFiltros({ ...filtros, maxPrice: event.target.value });
+    filtrarProductos();
+  };
+
+  const filtrarProductos = () => {
+    console.log("antes de filtrar: ", productos.length);
+    console.log("filtros.minPrice: ", filtros.minPrice);
+    console.log("filtros.maxPrice: ", filtros.maxPrice);
+    console.log("filtros.catgoria: ", filtros.categoria);
+    const productosFiltrados = productos.filter((producto) => {
+      return (
+        producto.price >= filtros.minPrice && producto.price <= filtros.maxPrice
+        // && (filtros.catgoria === "all" || producto.category === filtros.categoria)
+      );
+    });
+    console.log("filtre");
+    setProductos([...productosFiltrados]);
+    console.log("productosFiltrados: ", productosFiltrados.length);
+    console.log("despues de filtrar: ", productos.length);
   };
   return (
     <>

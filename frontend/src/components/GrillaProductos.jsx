@@ -86,7 +86,7 @@ const GrillaProductos = () => {
                       </div>
                     </div>
                     <img
-                      src={product.thumbnail}
+                      src={product.images[0]}
                       alt={product.title}
                       onClick={() => irAProducto(product.id)}
                       className="h-full w-full object-cover object-center lg:h-full lg:w-full"
@@ -112,7 +112,7 @@ const GrillaProductos = () => {
           </>
         ))}
       </div>
-
+      {productos.length}
       {productos.length > 0 && (
         <VistaRapidaProducto id={idProductoVistaRapida} />
       )}

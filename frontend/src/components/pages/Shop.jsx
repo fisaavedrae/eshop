@@ -12,7 +12,7 @@ import ShopHeaderFiltros from "../ShopHeaderFiltros";
 import Paginacion from "../Paginacion";
 import LoadingSpinner from "../LoadingSpinner";
 import GrillaProductos from "../GrillaProductos";
-import jsonProductos from "../../assets/productos.json";
+import jsonProductos from "../../assets/productos2.json";
 
 const Shop = () => {
   const { productos, setProductos } = useContext(MyContext);
